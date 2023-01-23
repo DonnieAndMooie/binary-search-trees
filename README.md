@@ -1,1 +1,1 @@
-# binary-search-trees
+The aim of this project is to complete the binary search tree project on TOP
