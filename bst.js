@@ -289,6 +289,34 @@ class Tree{
         let rightHeight = this.height(node.right)
         return (leftHeight > rightHeight ? leftHeight+1 : rightHeight + 1)
     }
+
+    depth(node){
+        let root = this.root
+        if (root.value === node.value){
+            console.log("Depth is 0")
+            return 0
+        }
+        else{
+            let depth = 0
+            while(root.value !== node.value && root.value !== null){
+                if (node.value > root.value){
+                    root = root.right
+                    depth++
+                }
+                else{
+                    root = root.left
+                    depth++
+                }
+            }
+            if (root.value === null){
+                console.log(root.value + " is not in the tree!")
+            }
+            else{
+                console.log("Depth is " + depth)
+                return depth
+            }
+        }
+    }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
@@ -297,10 +325,11 @@ test.delete(1)
 test.delete(4)
 test.delete(67)
 test.prettyPrint(test.root)
-let node = test.find(5)
+let node = test.find(12)
 test.levelOrder()
 test.inorder()
 test.preorder()
 test.postorder()
 let height = test.height(node)
 console.log(height)
+test.depth(node)
