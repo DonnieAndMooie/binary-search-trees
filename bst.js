@@ -280,6 +280,15 @@ class Tree{
         array.push(root.value)
         return array
     }
+
+    height(node){
+        if (node === null){
+            return -1
+        }
+        let leftHeight = this.height(node.left)
+        let rightHeight = this.height(node.right)
+        return (leftHeight > rightHeight ? leftHeight+1 : rightHeight + 1)
+    }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
@@ -288,8 +297,10 @@ test.delete(1)
 test.delete(4)
 test.delete(67)
 test.prettyPrint(test.root)
-test.find(6345)
+let node = test.find(5)
 test.levelOrder()
 test.inorder()
 test.preorder()
 test.postorder()
+let height = test.height(node)
+console.log(height)
