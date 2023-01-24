@@ -333,6 +333,11 @@ class Tree{
             return false
         }
     }
+    
+    rebalance(){
+        let array = this.inorder()
+        this.root = this.buildTree(array)
+    }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
@@ -350,3 +355,5 @@ let height = test.height(node)
 console.log(height)
 test.depth(node)
 test.isBalanced()
+test.rebalance()
+test.prettyPrint(test.root)
