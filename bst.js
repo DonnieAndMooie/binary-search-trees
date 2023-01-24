@@ -317,6 +317,22 @@ class Tree{
             }
         }
     }
+
+    isBalanced(){
+        let root = this.root
+        let leftHeight = this.height(root.left)
+        let rightHeight = this.height(root.right)
+        if (leftHeight - rightHeight === -1 ||
+            leftHeight - rightHeight === 0 ||
+            leftHeight - rightHeight === 1){
+                console.log("Tree is balanced!")
+                return true
+        }
+        else{
+            console.log("Tree is unbalanced!")
+            return false
+        }
+    }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
@@ -333,3 +349,4 @@ test.postorder()
 let height = test.height(node)
 console.log(height)
 test.depth(node)
+test.isBalanced()
