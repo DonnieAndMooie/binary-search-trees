@@ -86,6 +86,10 @@ class Tree{
         
         let root = this.root
         let parentNode
+
+        let index = this.array.indexOf(value)
+        this.array.splice(index, 1)
+
         while(root.value !== value){
             if (value > root.value){
                 parentNode = root
@@ -181,6 +185,38 @@ class Tree{
         return
         
     }
+
+    levelOrder(func=null){
+        let queue = []
+        let traversal = []
+        queue.push(this.root)
+        while(queue[0]){
+            let currentNode = queue[0]
+            traversal.push(currentNode.value)
+            queue.shift()
+            if (currentNode.left){
+                queue.push(currentNode.left)
+            }
+            if (currentNode.right){
+                queue.push(currentNode.right)
+            }
+            
+        }
+
+        if (func){
+            traversal.forEach(func)
+        }
+        else{
+            console.log(traversal)
+            return traversal
+        }
+        
+        
+        
+        
+        
+
+    }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
@@ -190,4 +226,6 @@ test.delete(4)
 test.delete(67)
 test.prettyPrint(test.root)
 test.find(6345)
+test.levelOrder()
+
 
