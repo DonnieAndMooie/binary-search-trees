@@ -161,6 +161,26 @@ class Tree{
 
         }
     }
+
+    find(value){
+        let currentNode = this.root
+        while (currentNode){
+            if (currentNode.value === value){
+                console.log(currentNode)
+                return currentNode
+            }
+            else if (value > currentNode.value)(
+                currentNode = currentNode.right
+            )
+            else{
+                currentNode = currentNode.left
+            }
+        }
+
+        console.log(value + " is not in the tree!")
+        return
+        
+    }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
@@ -169,4 +189,5 @@ test.delete(1)
 test.delete(4)
 test.delete(67)
 test.prettyPrint(test.root)
+test.find(6345)
 
