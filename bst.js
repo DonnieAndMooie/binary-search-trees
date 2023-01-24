@@ -10,7 +10,6 @@ class Tree{
     constructor(array){
         this.array = array
         this.root = this.buildTree(this.sortArray(array))
-        this.prettyPrint(this.root)
     }
 
     buildTree(array){
@@ -48,6 +47,126 @@ class Tree{
           this.prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
         }
       }
+
+      insert(value){
+        if (this.array.includes(value)){
+            console.log(value + " is already in the tree!")
+            return
+        }
+        this.array.push(value)
+        const newNode = new Node(value, null, null)
+        let root = this.root
+        while(root){
+            if (newNode.value > root.value){
+                if (root.right){
+                    root = root.right
+                }
+                else{
+                    root.right = newNode
+                    return
+                }   
+          }
+            else{
+                if (root.left){
+                    root = root.left
+                }
+                else{
+                    root.left = newNode
+                    return
+                }
+          }
+        }
+    }
+
+    delete(value){
+        if (!this.array.includes(value)){
+            console.log(value + " isn't in the tree so can't be deleted!")
+            return
+        }
+        
+        let root = this.root
+        let parentNode
+        while(root.value !== value){
+            if (value > root.value){
+                parentNode = root
+                root = root.right
+            }
+            else{
+                parentNode = root
+                root = root.left
+            }
+        }
+        if (root.left === null && root.right === null){
+            if (parentNode.left === root){
+                parentNode.left = null
+            }
+            else{
+                parentNode.right = null
+            }
+            return
+        }
+        if ((root.left && !root.right) || (root.right && !root.left)){
+            if (root.left){
+                if(root.left.value < parentNode.value){
+                    parentNode.left = root.left
+                    return
+                }
+                else{
+                    parentNode.right = root.left
+                    return
+                }
+                
+
+            }
+            else{
+                if(root.right.value < parentNode.value){
+                    parentNode.left = root.right
+                    return
+                }
+                else{
+                    parentNode.right = root.right
+                    return
+                }
+                
+            }
+        }
+        else{
+            let currentNode = root.right
+            let currentNodeParent = root
+            while (currentNode.left){
+                currentNodeParent = currentNode
+                currentNode = currentNode.left
+            }
+            if (currentNodeParent === root){
+                if (currentNode.value > parentNode.value){
+                    parentNode.right = currentNode
+                }
+                else{
+                    parentNode.left = currentNode
+                }
+                currentNode.left = root.left
+            }
+            else{
+                currentNodeParent.left = currentNode.right
+                currentNode.right = root.right
+                currentNode.left = root.left
+                if (currentNode.value > parentNode.value){
+                    parentNode.right = currentNode
+                }
+                else{
+                    parentNode.left = currentNode
+                }
+            }
+            
+
+        }
+    }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
+test.insert(12)
+test.delete(1)
+test.delete(4)
+test.delete(67)
+test.prettyPrint(test.root)
+
