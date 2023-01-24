@@ -210,12 +210,75 @@ class Tree{
             console.log(traversal)
             return traversal
         }
-        
-        
-        
-        
-        
+    }
 
+    inorder(func=null){
+        let root = this.root
+        const traversal =this.#inorderTraversal(root)
+        if (func){
+            traversal.forEach(func)
+        }
+        else{
+            console.log(traversal)
+            return traversal
+        }
+    }
+
+    #inorderTraversal(root, array=[]){
+       if (root.left){
+        this.#inorderTraversal(root.left, array)
+       }
+       array.push(root.value)
+       if (root.right){
+        this.#inorderTraversal(root.right, array)
+       }
+       return array
+    }
+
+    preorder(func=null){
+        let root = this.root
+        const traversal =this.#preorderTraversal(root)
+        if (func){
+            traversal.forEach(func)
+        }
+        else{
+            console.log(traversal)
+            return traversal
+        }
+    }
+
+    #preorderTraversal(root, array=[]){
+        array.push(root.value)
+        if (root.left){
+         this.#preorderTraversal(root.left, array)
+        }
+        if (root.right){
+         this.#preorderTraversal(root.right, array)
+        }
+        return array
+    }
+
+    postorder(func=null){
+        let root = this.root
+        const traversal =this.#postorderTraversal(root)
+        if (func){
+            traversal.forEach(func)
+        }
+        else{
+            console.log(traversal)
+            return traversal
+        }
+    }
+
+    #postorderTraversal(root, array=[]){
+        if (root.left){
+         this.#postorderTraversal(root.left, array)
+        }
+        if (root.right){
+         this.#postorderTraversal(root.right, array)
+        }
+        array.push(root.value)
+        return array
     }
 }
 
@@ -227,5 +290,6 @@ test.delete(67)
 test.prettyPrint(test.root)
 test.find(6345)
 test.levelOrder()
-
-
+test.inorder()
+test.preorder()
+test.postorder()
