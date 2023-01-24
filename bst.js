@@ -340,20 +340,37 @@ class Tree{
     }
 }
 
-const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
-test.insert(12)
-test.delete(1)
-test.delete(4)
-test.delete(67)
-test.prettyPrint(test.root)
-let node = test.find(12)
-test.levelOrder()
-test.inorder()
-test.preorder()
-test.postorder()
-let height = test.height(node)
-console.log(height)
-test.depth(node)
-test.isBalanced()
-test.rebalance()
-test.prettyPrint(test.root)
+
+function randomArray(num){
+    let counter = 0 
+    let array = []
+    while(counter <= num){
+        let x = Math.floor((Math.random()*100)+1)
+        array.push(x)
+        counter++
+    }
+    return array
+}
+//Simple Driver Script
+let array = randomArray(20)
+const tree = new Tree(array)
+tree.prettyPrint(tree.root)
+tree.isBalanced()
+tree.levelOrder()
+tree.preorder()
+tree.postorder()
+tree.inorder()
+tree.insert(565)
+tree.insert(693)
+tree.insert(974)
+tree.insert(432)
+tree.insert(777)
+tree.prettyPrint(tree.root)
+tree.isBalanced()
+tree.rebalance()
+tree.prettyPrint(tree.root)
+tree.isBalanced()
+tree.levelOrder()
+tree.preorder()
+tree.postorder()
+tree.inorder()
